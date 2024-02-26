@@ -13,39 +13,39 @@ const capabilities = {
   safariLogAllCommunication: true,
   acceptInsecureCerts: true,
 }
-async function runTestWithCaps () {
+async function runTestWithCaps() {
   let driver = wd.promiseRemote("https://sekarmanoj_XeuqF4:ceKAXjhwv15aHzPBm6pE@hub-cloud.browserstack.com/wd/hub");
   await driver.init(capabilities);
   await driver.get("https://the-internet.herokuapp.com/upload")
-  await new Promise(r => setTimeout(r, 2000));
   element = await driver.waitForElementById('file-upload')
-  // await element.click()
-  
-  let convertedData = "./Files/123.png";
-let pathData= "/Internal Storage/DCIM/123.png";
-   // Push file to device (custom method)
-   await driver.pushFile(pathData, convertedData);
+  const data = "./Files/123.png";
+  // await driver.pushFile('/Chrome/Downloads/123.png', data);
+  const fileUrl = 'https://drive.google.com/file/d/13CyODOmrAVPWwTQkTOTZH4xTdTy_Vtxn/view?usp=sharing';
 
-   await element.sendKeys("/private/var/mobile/Media/DCIM/IMG_0001.PNG")
-   // Switch to Native_App context
-  //  const contexts = await driver.getContexts();
-  //  const nativeContext = contexts.find(context => context.includes('NATIVE_APP'));
-  //  await driver.switchContext(nativeContext);
-  // await driver.context('NATIVE_APP')
-  // element = await driver.waitForElementByName('Photo Library')
-  // await element.click()
-  //  await new Promise(r => setTimeout(r, 20000));
-  // element = await driver.elementsByClassName('XCUIElementTypeImage')
-  // await element[0].click()
-  // await new Promise(r => setTimeout(r, 5000));
-  // element = await driver.waitForElementByName('Choose')
-  // await element.click()
-  // await new Promise(r => setTimeout(r, 10000));
-  // contexts = await driver.contexts();
-  // await driver.context(contexts[1])
-  // element = await driver.waitForElementById("file-submit")
-  // await element.click()
-  // await new Promise(r => setTimeout(r, 2000));
-  // await driver.quit();
+  // Assuming 'element' represents the file input element
+  // You would replace 'element' with the actual selector or WebDriverIO element reference
+  const element = await $('input[type="file"]'); // Example selector, replace with your actual selector
+
+  // Download the file from Google Drive and upload it
+  await browser.executeAsync(async (fileUrl, element, done) => {
+      try {
+          // Fetch the file from the URL
+          const response = await fetch(fileUrl);
+          const blob = await response.blob();
+
+          // Convert the file blob to base64
+          const reader = new FileReader();
+          reader.readAsDataURL(blob);
+          reader.onloadend = () => {
+              // Set the file content to the file input element
+              element.uploadFile(Buffer.from(reader.result.replace(/^data:.+;base64,/, ''), 'base64'));
+              done();
+          };
+      } catch (error) {
+          console.error('Error fetching or uploading file:', error);
+          done();
+      }
+  }, fileUrl, element);
+
 }
 runTestWithCaps();

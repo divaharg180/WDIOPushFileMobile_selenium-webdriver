@@ -38,7 +38,7 @@ const parallelConfig = {
     //   },
     // },
     {
-      browserName: 'Chromium',
+      browserName: 'safari',
       'bstack:options': {
         deviceName: 'iPhone 13',
         osVersion: '15',

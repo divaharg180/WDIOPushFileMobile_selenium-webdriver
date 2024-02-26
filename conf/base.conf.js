@@ -4,13 +4,16 @@ exports.config = {
 
   updateJob: false,
   specs: [
-    './tests/specs/mobileUpload.android.push.js',
-    "./tests/specs/mobileUpload.test.js",
+    // './tests/specs/mobileUpload.android.push.js',
+    // "./tests/specs/mobileUpload.test.js",
+    "./tests/specs/local_test.js",
+
   ],
   exclude: [],
 
   logLevel: "warn",
   coloredLogs: true,
+  UIFileSharingEnabled :true,
   screenshotPath: "./errorShots/",
   baseUrl: "",
   waitforTimeout: 10000,

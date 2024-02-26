@@ -23,8 +23,11 @@
   "homepage": "https://github.com/browserstack/webdriverio-browserstack#readme",
   "dependencies": {
     "@wdio/cli": "^7",
+    "axios": "^1.6.7",
     "chai": "^4.3.6",
+    "form-data": "^4.0.0",
     "jasmine": "^5.1.0",
+    "node-fetch": "^3.3.2",
     "path": "^0.12.7",
     "selenium-webdriver": "^4.17.0",
     "url": "^0.11.3",
