@@ -14,8 +14,7 @@ const capabilities = {
   acceptInsecureCerts: true,
 }
 async function runTestWithCaps() {
-  let driver = wd.promiseRemote("https://sekarmanoj_XeuqF4:ceKAXjhwv15aHzPBm6pE@hub-cloud.browserstack.com/wd/hub");
-  await driver.init(capabilities);
+  let driver = wd.promiseRemote("https://sekarg_xJCsHI:QHQeGwMLGQVLBzxzdcWU@hub-cloud.browserstack.com/wd/hub");  await driver.init(capabilities);
   await driver.get("https://the-internet.herokuapp.com/upload")
   element = await driver.waitForElementById('file-upload')
   const data = "./Files/123.png";

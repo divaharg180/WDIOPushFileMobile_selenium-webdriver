@@ -7,11 +7,10 @@ const capabilities = {
  'browserName' : 'iPhone',
  'name': 'BStack-[NodeJS] Sample Test',
  'build': 'BStack Build Number 1',
-  "nativeWebTap":true
+  "nativeWebTap":true,
 }
 async function runTestWithCaps () {
-  let driver = wd.promiseRemote("https://sekarmanoj_XeuqF4:ceKAXjhwv15aHzPBm6pE@hub-cloud.browserstack.com/wd/hub");
-  await driver.init(capabilities);
+  let driver = wd.promiseRemote("https://sekarg_xJCsHI:QHQeGwMLGQVLBzxzdcWU@hub-cloud.browserstack.com/wd/hub");  await driver.init(capabilities);
   await driver.get("https://support.staffbase.com/hc/en-us/article_attachments/360009197031/username.csv");
   await new Promise(r => setTimeout(r, 2000));
   await driver.context('NATIVE_APP');

@@ -1,6 +1,6 @@
 exports.config = {
-  user: "sekarmanoj_XeuqF4",
-  key: "ceKAXjhwv15aHzPBm6pE",
+  user: "sekarg_xJCsHI",
+  key: "QHQeGwMLGQVLBzxzdcWU",
 
   updateJob: false,
   specs: [

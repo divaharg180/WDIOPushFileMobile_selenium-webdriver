@@ -1,61 +1,38 @@
-describe('BStack Local Testing', () => {
-  it('can check tunnel working', async () => {
-      // Increase script timeout
-      browser.setTimeout({ script: 60000 }); // Set script timeout to 60 seconds
+const axios = require('axios');
+const fs = require('fs');
 
-      // Navigate to the upload page
-      await browser.url("https://the-internet.herokuapp.com/upload");
+async function uploadMedia() {
+    try {
+        // Read the file as a buffer
+        const fileBuffer = fs.readFileSync('/private/var/mobile/Media/DCIM/');
 
-      // Handle cookie consent popup
-      await acceptCookieConsent();
+        // Make a POST request to upload the media
+        const response = await axios.post('https://api-cloud.browserstack.com/app-automate/upload-media', {
+            file: fileBuffer,
+            custom_id: 'SampleFile'
+        }, {
+            auth: {
+                username: 'sekarg_xJCsHI',
+                password: 'QHQeGwMLGQVLBzxzdcWU'
+            },
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        });
 
-      // Wait for the file input element to be displayed
-      const element = await $('input[type="file"]');
-      await element.waitForDisplayed();
+        // Extract media URL from the response
+        const mediaURL = response.data.media_url;
+        console.log('Media uploaded successfully. Media URL:', mediaURL);
 
-      // Define the Google Drive file URL
-      const fileUrl = 'https://drive.usercontent.google.com/u/0/uc?id=13CyODOmrAVPWwTQkTOTZH4xTdTy_Vtxn&export=download';
-
-      // Upload the file
-      await uploadFile(fileUrl, element);
-
-      // Verify the uploaded file name is displayed
-      const fileName = await element.getValue();
-      console.log('Uploaded file name:', fileName);
-  });
-});
-
-// Function to accept the cookie consent popup
-async function acceptCookieConsent() {
-  const acceptButton = await $('button=Accept'); // Adjust the selector as needed
-  if (await acceptButton.isDisplayed()) {
-      await acceptButton.click();
-  }
+        // Set capabilities with media URL
+        const capabilities = {
+            'browserstack.uploadMedia': [`media://90c7a8h8dc82308108734e9a46c24d8f01de12881`]
+        };
+        console.log('Capabilities:', capabilities);
+    } catch (error) {
+        console.error('Error uploading media:', error.message);
+    }
 }
 
-// Function to upload a file
-async function uploadFile(fileUrl, element) {
-  await browser.executeAsync(async (fileUrl, element, done) => {
-      try {
-          // Fetch the file from the URL
-          const response = await fetch(fileUrl);
-          const blob = await response.blob();
-
-          // Convert the file blob to base64
-          const reader = new FileReader();
-          reader.readAsDataURL(blob);
-          reader.onloadend = () => {
-              // Set the file content to the file input element
-              element.uploadFile(Buffer.from(reader.result.replace(/^data:.+;base64,/, ''), 'base64'));
-
-              // Dispatch change event to trigger visual update
-              element.dispatchEvent(new Event('change', { bubbles: true }));
-
-              done();
-          };
-      } catch (error) {
-          console.error('Error fetching or uploading file:', error);
-          done();
-      }
-  }, fileUrl, element);
-}
+// Call the function to upload media and set capabilities
+uploadMedia();
