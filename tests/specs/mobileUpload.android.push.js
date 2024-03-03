@@ -10,7 +10,7 @@ const capabilities = {
   "nativeWebTap": true
 }
 async function runTestWithCaps() {
-  let driver = wd.promiseRemote("https://sekarg_xJCsHI:QHQeGwMLGQVLBzxzdcWU@hub-cloud.browserstack.com/wd/hub");  await driver.init(capabilities);
+  let driver = wd.promiseRemote("https://divamanojg_Pgtbdy:k7LGdEBCyLVYQyHoksap@hub-cloud.browserstack.com/wd/hub");  await driver.init(capabilities);
   await driver.get("https://the-internet.herokuapp.com/upload")
   await new Promise(r => setTimeout(r, 2000));
   const files = [

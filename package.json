@@ -5,7 +5,10 @@
   "description": "Selenium examples for WebdriverIO and BrowserStack Automate",
   "scripts": {
     "test": "npx wdio conf/test.conf.js",
-    "local": "npx wdio conf/local-test.conf.js"
+    "local": "npx wdio conf/local-test.conf.js",
+    "ios-media-upload": "node tests/specs/ios.media.upload.js",
+    "ios-pre-upload": "node tests/specs/mobile.ios.preUpload..js",
+    "android-upload": "node tests/specs/mobileUpload.android.push.js"  
   },
   "repository": {
     "type": "git",

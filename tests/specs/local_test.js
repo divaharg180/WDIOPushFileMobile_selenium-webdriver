@@ -12,8 +12,8 @@ async function uploadMedia() {
             custom_id: 'SampleFile'
         }, {
             auth: {
-                username: 'sekarg_xJCsHI',
-                password: 'QHQeGwMLGQVLBzxzdcWU'
+                username: 'divamanojg_Pgtbdy',
+                password: 'k7LGdEBCyLVYQyHoksap'
             },
             headers: {
                 'Content-Type': 'multipart/form-data'

@@ -17,7 +17,7 @@ async function runTestWithCaps() {
   };
 
   // Initialize WebDriver with BrowserStack capabilities
-  let driver = wd.promiseRemote("https://sekarg_xJCsHI:QHQeGwMLGQVLBzxzdcWU@hub-cloud.browserstack.com/wd/hub");
+  let driver = wd.promiseRemote("https://divamanojg_Pgtbdy:k7LGdEBCyLVYQyHoksap@hub-cloud.browserstack.com/wd/hub");
   await driver.init(capabilities);
 
   await driver.get("https://the-internet.herokuapp.com/upload")

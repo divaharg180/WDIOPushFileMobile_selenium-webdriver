@@ -8,17 +8,17 @@ const capabilities = {
   'name': 'BStack-[NodeJS] Sample Test',
   'build': 'BStack Build Number 1',
   'nativeWebTap': true,
-  'browserstack.uploadMedia': ["media://2489dc728273238dbb8aa0b3ec4836c7e163fd06"]
+  'browserstack.uploadMedia': ["media://fbce3b871000e12e3d5bc7df2c03d4db6d9db14f"]
 }
 async function runTestWithCaps() {
-  let driver = wd.promiseRemote("https://sekarg_xJCsHI:QHQeGwMLGQVLBzxzdcWU@hub-cloud.browserstack.com/wd/hub");
+  let driver = wd.promiseRemote("https://divamanojg_Pgtbdy:k7LGdEBCyLVYQyHoksap@hub-cloud.browserstack.com/wd/hub");
   await driver.init(capabilities);
   await driver.get("https://the-internet.herokuapp.com/upload")
   await new Promise(r => setTimeout(r, 2000));
   element = await driver.waitForElementById('file-upload')
   await element.click()
   await driver.context('NATIVE_APP')
-  element = await driver.waitForElementByName('Choose File')
+  element = await driver.waitForElementByName('Photo Library')
   await element.click()
   await new Promise(r => setTimeout(r, 2000));
   element = await driver.elementsByClassName('XCUIElementTypeImage')
